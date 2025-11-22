@@ -1,0 +1,6 @@
+@IssuesLogsAPI_HostAddress = http://localhost:5157
+
+GET {{IssuesLogsAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

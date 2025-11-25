@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { json } from "stream/consumers";
 import IssueLog from "./issuelogmodel";
+import "bootstrap/dist/css/bootstrap.css";
+import axios from "axios";
 
 function App() {
   const [issueLog, setIssueLog] = useState<IssueLog[]>();
-  const [id, setId] = useState(0);
   const [project, setProject] = useState("");
   const [module, setModule] = useState("");
   const [errorDescription, setErrorDescription] = useState("");
@@ -15,6 +14,7 @@ function App() {
   const [responseId, setResponseId] = useState(null);
   const [error, setError] = useState(null);
 
+  //function to insert data
   const handleIssueInsert = async () => {
     let params = {
       project: project,
@@ -25,26 +25,20 @@ function App() {
     };
 
     try {
-      const response = await fetch(
+      const response = await axios.post(
         "https://localhost:7121/api/AdminIssueLogs",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(params),
-        }
+        params
       );
-
-      const data = await response.json();
-      setResponseId(data.id);
-      setError(null);
+      fetchIssues();
+      setResponseId(response.data.id);
+      setError(null);      
     } catch (e: any) {
       setError(e.Message);
       setResponseId(null);
     }
   };
 
+  //function to update data
   function handleUpdate(issue: IssueLog) {
     handleIssueUpdate(issue).then(() => {
       fetchIssues(); // 🔄 refresh data after put
@@ -55,24 +49,15 @@ function App() {
     issue.state = "fixed";
 
     try {
-      const response = await fetch(
+      const response = await axios.put(
         `https://localhost:7121/api/AdminIssueLogs/${issue.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(issue),
-        }
+        issue
       );
 
-      let data = null;
-      const text = await response.text();
+      setResponseId(response.data?.id);
+      setError(null);
 
-      if (text) {
-        data = JSON.parse(text);
-        setResponseId(data.id);
-      }
+      let data = null;
 
       setError(null);
     } catch (e: any) {
@@ -81,104 +66,132 @@ function App() {
     }
   };
 
+  //main function to get data list
   const fetchIssues = async () => {
-    const res = await fetch("https://localhost:7121/api/AdminIssueLogs");
-    const data = await res.json();
-    setIssueLog(data);
+    const response = await axios.get(
+      "https://localhost:7121/api/AdminIssueLogs"
+    );
+    setIssueLog(response.data);
   };
 
+  //execute main function
   useEffect(() => {
     fetchIssues();
   }, []);
 
   return (
-    <div className="App">
+    <div className="container App">
       <header className="App-header">
         <p>
           <h2>Admin Issues Tracker</h2>
         </p>
-        <p>
-          <div>
-            <form onSubmit={handleIssueInsert}>
-              <h5>Insert Issue</h5>
-              <input
-                type="text"
-                id="project"
-                placeholder="insert project"
-                value={project}
-                onChange={(event) => setProject(event.target.value)}
-              />
-              <input
-                type="text"
-                id="module"
-                placeholder="insert module"
-                value={module}
-                onChange={(event) => setModule(event.target.value)}
-              />
-              <input
-                type="text"
-                id="errorDescription"
-                placeholder="insert Description"
-                value={errorDescription}
-                onChange={(event) => setErrorDescription(event.target.value)}
-              />
-              <input
-                type="text"
-                id="type"
-                placeholder="insert type"
-                value={type}
-                onChange={(event) => setType(event.target.value)}
-              />
-              <input
-                type="text"
-                id="state"
-                placeholder="insert state"
-                value={state}
-                onChange={(event) => setState(event.target.value)}
-              />
-              <button type="submit">Insert</button>
+
+        <div className="container">
+          <div className="row">
+            <form onSubmit={handleIssueInsert} className="col-12">
+              <h5 className="mb-3">New Issue</h5>
+              <div className="row g-2">
+                <div className="col-2">
+                  <input
+                    type="text"
+                    id="project"
+                    placeholder="Insert project"
+                    value={project}
+                    className="form-control"
+                    onChange={(e) => setProject(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-2">
+                  <input
+                    type="text"
+                    id="module"
+                    placeholder="Insert module"
+                    value={module}
+                    className="form-control"
+                    onChange={(e) => setModule(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-2">
+                  <input
+                    type="text"
+                    id="errorDescription"
+                    placeholder="Insert description"
+                    value={errorDescription}
+                    className="form-control"
+                    onChange={(e) => setErrorDescription(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-2">
+                  <input
+                    type="text"
+                    id="type"
+                    placeholder="Insert type"
+                    value={type}
+                    className="form-control"
+                    onChange={(e) => setType(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-2">
+                  <input
+                    type="text"
+                    id="state"
+                    placeholder="Insert state"
+                    value={state}
+                    className="form-control"
+                    onChange={(e) => setState(e.target.value)}
+                  />
+                </div>
+
+                <button type="submit" className="btn btn-primary col-2">
+                  Insert
+                </button>
+              </div>
             </form>
           </div>
-        </p>
-        <p>
-          {issueLog ? (
-            <div>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Project</th>
-                    <th>Module</th>
-                    <th>Description</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Action</th>
+          <br />
+        </div>
+        {issueLog ? (
+          <div className="container">
+            <table className="table table-striped table w-auto m-3 ">
+              <thead>
+                <tr>
+                  <th>Project</th>
+                  <th>Module</th>
+                  <th>Description</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {issueLog.map((lg) => (
+                  <tr key={lg.id}>
+                    <td>{`${lg.project}`}</td>
+                    <td>{`${lg.module}`}</td>
+                    <td>{`${lg.errorDescription}`}</td>
+                    <td>{`${lg.type}`}</td>
+                    <td>{`${lg.state}`}</td>
+                    <td>
+                      <button
+                        onClick={() => handleUpdate(lg)}
+                        disabled={lg.state ? lg.state == "fixed" : false}
+                        className="btn btn-primary"
+                      >
+                        Fixed
+                      </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {issueLog.map((lg) => (
-                    <tr key={lg.id}>
-                      <td>{`${lg.project}`}</td>
-                      <td>{`${lg.module}`}</td>
-                      <td>{`${lg.errorDescription}`}</td>
-                      <td>{`${lg.type}`}</td>
-                      <td>{`${lg.state}`}</td>
-                      <td>
-                        <button
-                          onClick={() => handleUpdate(lg)}
-                          disabled={lg.state ? lg.state == "fixed" : false}
-                        >
-                          Fixed
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            "cargando..."
-          )}
-        </p>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          "cargando..."
+        )}
       </header>
       <div>
         <label>{`${error}`}</label>

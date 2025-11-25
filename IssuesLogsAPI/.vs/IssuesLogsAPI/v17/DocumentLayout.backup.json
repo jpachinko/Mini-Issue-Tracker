@@ -9,6 +9,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{18E15210-1DE7-4D64-8117-D559D3348079}|IssuesLogsAPI\\IssuesLogsAPI.csproj|c:\\users\\pacheco\\source\\repos\\issueslogsapi\\issueslogsapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{18E15210-1DE7-4D64-8117-D559D3348079}|IssuesLogsAPI\\IssuesLogsAPI.csproj|solutionrelative:issueslogsapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18E15210-1DE7-4D64-8117-D559D3348079}|IssuesLogsAPI\\IssuesLogsAPI.csproj|c:\\users\\pacheco\\source\\repos\\issueslogsapi\\issueslogsapi\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18E15210-1DE7-4D64-8117-D559D3348079}|IssuesLogsAPI\\IssuesLogsAPI.csproj|solutionrelative:issueslogsapi\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18E15210-1DE7-4D64-8117-D559D3348079}|IssuesLogsAPI\\IssuesLogsAPI.csproj|c:\\users\\pacheco\\source\\repos\\issueslogsapi\\issueslogsapi\\models\\issuelog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18E15210-1DE7-4D64-8117-D559D3348079}|IssuesLogsAPI\\IssuesLogsAPI.csproj|solutionrelative:issueslogsapi\\models\\issuelog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +26,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IssueLog.cs",
+              "DocumentMoniker": "C:\\Users\\Pacheco\\source\\repos\\IssuesLogsAPI\\IssuesLogsAPI\\Models\\IssueLog.cs",
+              "RelativeDocumentMoniker": "IssuesLogsAPI\\Models\\IssueLog.cs",
+              "ToolTip": "C:\\Users\\Pacheco\\source\\repos\\IssuesLogsAPI\\IssuesLogsAPI\\Models\\IssueLog.cs",
+              "RelativeToolTip": "IssuesLogsAPI\\Models\\IssueLog.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T15:05:11.094Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Pacheco\\source\\repos\\IssuesLogsAPI\\IssuesLogsAPI\\Context\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "IssuesLogsAPI\\Context\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Pacheco\\source\\repos\\IssuesLogsAPI\\IssuesLogsAPI\\Context\\AppDbContext.cs",
+              "RelativeToolTip": "IssuesLogsAPI\\Context\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T15:05:37.719Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -28,7 +60,7 @@
               "RelativeDocumentMoniker": "IssuesLogsAPI\\appsettings.json",
               "ToolTip": "C:\\Users\\Pacheco\\source\\repos\\IssuesLogsAPI\\IssuesLogsAPI\\appsettings.json",
               "RelativeToolTip": "IssuesLogsAPI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-11-21T15:54:55.465Z"
             },
@@ -40,7 +72,7 @@
               "RelativeDocumentMoniker": "IssuesLogsAPI\\Program.cs",
               "ToolTip": "C:\\Users\\Pacheco\\source\\repos\\IssuesLogsAPI\\IssuesLogsAPI\\Program.cs",
               "RelativeToolTip": "IssuesLogsAPI\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACMAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-21T15:56:34.75Z",
               "EditorCaption": ""

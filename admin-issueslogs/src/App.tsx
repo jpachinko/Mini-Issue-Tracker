@@ -12,7 +12,21 @@ function App() {
   const [type, setType] = useState("");
   const [state, setState] = useState("");
   const [responseId, setResponseId] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+
+
+  //main function to get data list
+  const fetchIssues = async () => {
+    try {
+      const response = await axios.get(
+        "https://localhost:7121/api/AdminIssueLogs"
+      );
+      setIssueLog(response.data);
+    } catch (e: any) {
+      console.error("No se pudo conectar al backend:", e);
+      setError("Error to get the List: " + e.message);
+    }
+  };
 
   //function to insert data
   const handleIssueInsert = async () => {
@@ -31,20 +45,21 @@ function App() {
       );
       fetchIssues();
       setResponseId(response.data.id);
-      setError(null);      
+      setError(null);
     } catch (e: any) {
-      setError(e.Message);
+      setError("Error to Insert: " + e.Message);
       setResponseId(null);
     }
   };
 
-  //function to update data
+  //function to update data 1.1
   function handleUpdate(issue: IssueLog) {
     handleIssueUpdate(issue).then(() => {
       fetchIssues(); // 🔄 refresh data after put
     });
   }
 
+  //function to update data 1.2
   const handleIssueUpdate = async (issue: IssueLog) => {
     issue.state = "fixed";
 
@@ -61,17 +76,9 @@ function App() {
 
       setError(null);
     } catch (e: any) {
-      setError(e.message);
+      setError("Error to Update: " + e.message);
       setResponseId(null);
     }
-  };
-
-  //main function to get data list
-  const fetchIssues = async () => {
-    const response = await axios.get(
-      "https://localhost:7121/api/AdminIssueLogs"
-    );
-    setIssueLog(response.data);
   };
 
   //execute main function
@@ -190,7 +197,7 @@ function App() {
             </table>
           </div>
         ) : (
-          "cargando..."
+          <div style={{ color: "gray", marginTop: "10px" }}>{error}</div>
         )}
       </header>
       <div>
